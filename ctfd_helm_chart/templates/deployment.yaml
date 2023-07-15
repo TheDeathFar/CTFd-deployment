@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app_name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:    
+      app: {{ .Values.app_name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app_name }}
+    spec:
+      securityContext:
+        fsGroup: 2000
+      containers:
+      - name: {{ .Values.app_name }}
+        image: {{ .Values.image }}
+        env:
+        - name: ACCESS_LOG
+          value: {{ .Values.env.access-log }}
+        - name: ERROR_LOG
+          value: {{ .Values.env.error-log }}
+        - name: DATABASE_URL
+          value: {{ .Values.env.database-url }}
+        - name: REDIS_URL
+          value: {{ .Values.env.redis-url }}
+        - name: LOG_FOLDER
+          value: {{ .Values.env.log-folder }}
+        - name: REVERSE_PROXY
+          value: {{ .Values.env.reverse-proxy }}
+        - name: UPLOAD_FOLDER
+          value: {{ .Values.env.upload-folder }}
+        - name: WORKERS
+          value: {{ .Values.env.workers }}
+        resources:
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.ports.containerPort }}
+        volumeMounts:
+        - name: {{ .Values.volumes.name }}
+          mountPath: {{ .Values.volumes.path }}
+      volumes:
+      - name: {{ .Values.volumes.name }}
+        nfs:
+          server: {{ .Values.volumes.server }}
+          path: {{ .Values.volumes.path }}

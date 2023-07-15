@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.issuer }}
+    cert-manager.io/duration: {{ .Values.ingress.duration }}
+    cert-manaher.io/renew-before: {{ .Values.ingress.renew_before }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: {{ .Values.ingress.secretName }}
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - pathType: {{ .Values.ingress.pathType }}
+        path: "/"
+        backend:
+          service:
+            name: {{ .Values.app_name }}
+            port:
+              number: {{ .Values.ports.port }}

@@ -1,0 +1,10 @@
+db:
+  user: ctfd
+  password: ctfd
+  name: ctfd
+rootUser:
+  password: ctfd
+podSecurityContext:
+  fsGroup: 2000
+metrics:
+  enabled: true

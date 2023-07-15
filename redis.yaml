@@ -1,0 +1,19 @@
+auth:
+  enabled: false
+  sentinel: false
+
+## Prometheus Exporter / Metrics
+##
+metrics:
+ enabled: true
+ 
+ image:
+   registry: docker.io
+   repository: bitnami/redis-exporter
+   tag: 1.4.0-debian-10-r3
+   pullPolicy: IfNotPresent
+ 
+ ## Metrics exporter pod Annotation and Labels
+ podAnnotations:
+   prometheus.io/scrape: "true"
+   prometheus.io/port: "9121"

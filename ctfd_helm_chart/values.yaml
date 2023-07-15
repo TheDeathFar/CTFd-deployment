@@ -1,0 +1,43 @@
+app_name: ctfd-app
+image: 'ctfd/ctfd'
+namespace: ctfd
+
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "500m"
+
+ports:
+  containerPort: 8000
+  port: 8000
+
+replicas: 1
+
+service:
+  type: LoadBalancer
+  sessionAffinity: None
+
+ingress:
+  name: ctfd-ingress
+  host: myctfd.practice.ru
+  pathType: Prefix
+  issuer: "selfsigned"
+  duration: 2160h
+  renew_before: 360h
+  className: nginx
+  secretName: myctfd-tls-secret
+
+volumes:
+  name: ctf-data
+  server: 158.160.111.226
+  path: /data/nfs
+
+env:
+  access-log: '-'
+  error-log: '-'
+  database-url: mysql+pymysql://ctfd:ctfd@10.96.225.96:3306/ctfd
+  redis-url: redis://10.96.192.114:6379
+  log-folder: /data/nfs
+  upload-folder: /data/nfs
+  reverse-proxy: true
+  workers: "1"
