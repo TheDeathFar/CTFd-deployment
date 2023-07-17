@@ -35,7 +35,7 @@ volumes:
 env:
   access-log: '-'
   error-log: '-'
-  database-url: mysql+pymysql://ctfd:ctfd@10.96.225.96:3306/ctfd
+  database-url: mysql+pymysql://ctfd:ctfd@10.96.212.74:3306/ctfd
   redis-url: redis://10.96.192.114:6379
   log-folder: /data/nfs
   upload-folder: /data/nfs
