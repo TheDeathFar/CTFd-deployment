@@ -3,7 +3,6 @@ auth:
   sentinel: false
 
 ## Prometheus Exporter / Metrics
-##
 metrics:
  enabled: true
  

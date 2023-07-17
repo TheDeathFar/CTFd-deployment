@@ -33,11 +33,7 @@ volumes:
   path: /data/nfs
 
 env:
-  access-log: '-'
-  error-log: '-'
-  database-url: mysql+pymysql://ctfd:ctfd@10.96.212.74:3306/ctfd
-  redis-url: redis://10.96.192.114:6379
-  log-folder: /data/nfs
-  upload-folder: /data/nfs
-  reverse-proxy: true
-  workers: "1"
+  database_url: mysql+pymysql://ctfd:ctfd@10.96.212.74:3306/ctfd
+  redis_url: redis://10.96.192.114:6379
+  log_folder: /data/nfs
+  upload_folder: /data/nfs

@@ -20,21 +20,21 @@ spec:
         image: {{ .Values.image }}
         env:
         - name: ACCESS_LOG
-          value: {{ .Values.env.access-log }}
+          value: '-'
         - name: ERROR_LOG
-          value: {{ .Values.env.error-log }}
+          value: '-'
         - name: DATABASE_URL
-          value: {{ .Values.env.database-url }}
+          value: {{ .Values.env.database_url }}
         - name: REDIS_URL
-          value: {{ .Values.env.redis-url }}
+          value: {{ .Values.env.redis_url }}
         - name: LOG_FOLDER
-          value: {{ .Values.env.log-folder }}
+          value: {{ .Values.env.log_folder }}
         - name: REVERSE_PROXY
-          value: {{ .Values.env.reverse-proxy }}
+          value: 'true'
         - name: UPLOAD_FOLDER
-          value: {{ .Values.env.upload-folder }}
+          value: {{ .Values.env.upload_folder }}
         - name: WORKERS
-          value: {{ .Values.env.workers }}
+          value: "1"
         resources:
           limits:
             memory: {{ .Values.resources.limits.memory }}
